@@ -1,1 +1,1 @@
-unsigned char *dectohexdec(int decimal);
+char *dectohexdec(int decimal);
