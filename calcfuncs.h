@@ -1,0 +1,1 @@
+unsigned char *dectohexdec(int decimal);
