@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
     char InputText[16] = { 0 }, InputKey[16] = { 0 };
     int DecimalInputText[16] = { 0 }, DecimalInputKey[16] = { 0 };
-    unsigned char *hex[16] = { 0x0 };
+    char *HexText[16] = { 0 }, *HexKey[16] = { 0 };
 
     if(argc != 3)
     {
@@ -23,6 +23,12 @@ int main(int argc, char *argv[])
     if(strlen(argv[1]) == 0)
     {
         printf("Длина текста не может быть равна нулю.\n");
+        return 1;
+    }
+
+    if(strlen(argv[1]) > 16)
+    {
+        printf("Длина текста не может быть больше 16 символов.\n");
         return 1;
     }
 
@@ -42,12 +48,24 @@ int main(int argc, char *argv[])
     for(FirstCounter = 0; FirstCounter < strlen(InputKey); ++FirstCounter)
         DecimalInputKey[FirstCounter] = InputKey[FirstCounter];
     
-    for(FirstCounter = 0; FirstCounter < strlen(InputText); ++FirstCounter)
-        hex[FirstCounter] = dectohexdec(DecimalInputText[FirstCounter]);
-
-    
-   // for(FirstCounter = 0; FirstCounter < strlen(InputText); ++FirstCounter)
-     //   printf("%x\t", hex[FirstCounter]);
+    printf("hexadecimal text block: ");
+    for(FirstCounter = 0; FirstCounter < ByteBlockSize; ++FirstCounter)
+    {        
+        HexText[FirstCounter] = dectohexdec(DecimalInputText[FirstCounter]);
+        if(FirstCounter % 4 == 0)
+            printf("\n");
+        printf(" 0x%s ", HexText[FirstCounter]);        
+    }
+    printf("\n\n");
+    printf("hexadecimal key block: ");
+    for(FirstCounter = 0; FirstCounter < ByteBlockSize; ++FirstCounter)
+    {        
+        HexKey[FirstCounter] = dectohexdec(DecimalInputKey[FirstCounter]);
+        if(FirstCounter % 4 == 0)
+            printf("\n");
+        printf(" 0x%s ", HexText[FirstCounter]);
+    }
+    printf("\n");
 
 
     return 0;
